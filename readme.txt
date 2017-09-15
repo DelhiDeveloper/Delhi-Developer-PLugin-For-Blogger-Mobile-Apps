@@ -36,8 +36,9 @@ You can also contribute to the plugin source code on GitHub here:-
 https://github.com/delhideveloper/Wordpress-Plugin-Show-On-Scroll
 
 
-Just read this article aboout the plugin:
-[Show On Scroll : A Free Wordpress Plugin Developed by Delhi Developer](https://delhideveloper.com/wordpress-plugin-show-on-scroll/)
+You can also purchase a Mobile App from us that works with the plugin by visiting this link:-
+
+[Bloggers Android Mobile App & Rest API Plugin](https://delhideveloper.com/product/wordpress-android-mobile-app-rest-api-plugin/)
 
 
 Developed by: [Delhi Developer](https://delhideveloper.com/) : [Website Designing Company in Delhi](https://delhideveloper.com/)
