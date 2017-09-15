@@ -33,7 +33,7 @@ Go to the mobile app author chats page to actually chat with your mobile appsubs
 
 
 You can also contribute to the plugin source code on GitHub here:-
-https://github.com/delhideveloper/Wordpress-Plugin-Show-On-Scroll
+https://github.com/delhideveloper/Delhi-Developer-PLugin-For-Blogger-Mobile-Apps
 
 
 You can also purchase a Mobile App from us that works with the plugin by visiting this link:-
@@ -42,5 +42,6 @@ You can also purchase a Mobile App from us that works with the plugin by visitin
 
 
 Developed by: [Delhi Developer](https://delhideveloper.com/) : [Website Designing Company in Delhi](https://delhideveloper.com/)
+
 
 
