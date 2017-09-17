@@ -45,6 +45,16 @@ function dd_get_youtube_channel_videos( $request ) {
 		return $response;
 	}
 	
+	/******************************************************************************
+	*******************************************************************************
+			Getting only the first 20 videos for now
+			TO DO: Write code to get videos in form of pages of 10 videos each.
+			Also: Changes accordingly will be needed to be made to the mobile app.
+	*******************************************************************************
+	******************************************************************************/
+	/* Getting the only first top 20 videos of the channel */
+	$videos = array_slice($videos, 0, 19);
+	
 	$response = new stdClass();
 	$response->type		= 'Success';
 	$response->code		= 'Videos Retreived';

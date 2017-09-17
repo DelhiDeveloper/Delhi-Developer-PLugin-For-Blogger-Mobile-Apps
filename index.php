@@ -1,11 +1,12 @@
 <?php
     /*
-    Plugin Name: Delhi Developer PLugin For Blogger Mobile Apps
-    Plugin URI: https://delhideveloper.com/product/wordpress-android-mobile-app-rest-api-plugin/
-    Description: This is the official plugin developed by Delhi Developer to support the mobile apps made by delhi developer for various Wordpress Bloggers. To purchase this mobile app for android visit: <a href="https://delhideveloper.com/product/wordpress-android-mobile-app-rest-api-plugin/">Delhi Developer</a>.
+    Plugin Name: Delhi Developer Blog Mobile API
+    Plugin URI: https://delhideveloper.com/
+    Description: A plugin to support the mobile apps made by delhi developer for Wordpress Bloggers.
     Version: 1.0
     Author: Delhi Developer
     Author URI: https://delhideveloper.com/
+    License: Propriety
     */
 	
 	
