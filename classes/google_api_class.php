@@ -1,6 +1,10 @@
 <?php
 
 
+/* Securing Plugin From Direct Access through the URL Path */
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+
 /* // This is not needed anymore as it has been made a parameter of the constructor and property of class.
 define( 
 	'GOOGLE_API_KEY', 
@@ -9,7 +13,7 @@ define(
 */
 
 
-class GoogleAPI {
+class DDGoogleAPI {
 	
 	public $google_api_key; // Google API Key
 	

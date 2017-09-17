@@ -1,6 +1,10 @@
 <?php
 
 
+/* Securing Plugin From Direct Access through the URL Path */
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+
 
 
 /************************************ AJAX REQUESTS RESPONSES *************************************/
@@ -367,7 +371,7 @@ function dd_mobile_app_admin_chats_list_page() {
 					return str.join("&");
 				},
 				method 	: "POST",
-				url		: '<?php echo WEBSITE_SITEURL; ?>/wp-admin/admin-ajax.php', // ajaxurl,
+				url		: '<?php echo DD_WEBSITE_SITEURL; ?>/wp-admin/admin-ajax.php', // ajaxurl,
 				data	: {
 					'action': 'dd_mobile_app_admin_chats_list',
 					'token': '<?php echo create_user_token( $user ); ?>',
@@ -408,7 +412,7 @@ function dd_mobile_app_admin_chats_list_page() {
 			
 			//alert( target_chat_user_id );
 			
-			$window.location.href = '<?php echo WEBSITE_SITEURL; ?>'
+			$window.location.href = '<?php echo DD_WEBSITE_SITEURL; ?>'
 				+ '/wp-admin/admin.php?page=dd_mobile_app_admin_chat_single_page&chat_user_id='
 				+ target_chat_user_id
 			;

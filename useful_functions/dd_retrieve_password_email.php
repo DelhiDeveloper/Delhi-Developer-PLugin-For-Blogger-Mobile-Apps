@@ -1,12 +1,16 @@
 <?php
 
+
+/* Securing Plugin From Direct Access through the URL Path */
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 /* Sends Reset Pasword Email for Rest API */
 /* Customized Version of Wordpress retrieve_password() function  */
 
 
 
 
-function retrieve_password_email( $user_login ) {
+function dd_retrieve_password_email( $user_login ) {
 	
 	$errors = new WP_Error();
 
@@ -35,13 +39,13 @@ function retrieve_password_email( $user_login ) {
 	$user_login = $user_data->user_login;
 	$user_email = $user_data->user_email;
 	
-	$key = get_mobile_app_user_password_reset_key( $user_data );
+	$key = dd_get_mobile_app_user_password_reset_key( $user_data );
 
 	if ( is_wp_error( $key ) ) {
 		return $key;
 	}
 	
-	$password_reset_url = WEBSITE_URL . "/wp-login.php?action=rp&key=$key&login=" . rawurlencode($user_login);
+	$password_reset_url = DD_WEBSITE_URL . "/wp-login.php?action=rp&key=$key&login=" . rawurlencode($user_login);
 	$password_reset_link = '<a href="' . $password_reset_url . '">' . $password_reset_url . '</a>';
 	
 	$message = __('Someone has requested a password reset for the following account:') . "\r\n\r\n";

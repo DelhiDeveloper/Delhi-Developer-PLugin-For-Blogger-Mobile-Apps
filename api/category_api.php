@@ -1,6 +1,10 @@
 <?php
 
 
+/* Securing Plugin From Direct Access through the URL Path */
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+
 
 	
 	
@@ -13,11 +17,11 @@
 			'/top_level_categories', 
 			array(
 				'methods' => 'POST',
-				'callback' => 'retreive_top_level_categories_json',
+				'callback' => 'dd_retreive_top_level_categories_json',
 			) 
 		);
 	} );
-	function retreive_top_level_categories_json( $request ) {
+	function dd_retreive_top_level_categories_json( $request ) {
 		
 		
 		$categories = get_terms( 

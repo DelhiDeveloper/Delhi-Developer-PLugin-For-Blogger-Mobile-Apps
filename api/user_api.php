@@ -1,6 +1,10 @@
 <?php
 
 
+/* Securing Plugin From Direct Access through the URL Path */
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+
 
 
 
@@ -12,11 +16,11 @@ add_action( 'rest_api_init', function () {
 		'/register', 
 		array(
 			'methods' => 'POST',
-			'callback' => 'register_new_mobile_app_user',
+			'callback' => 'dd_register_new_mobile_app_user',
 		) 
 	);
 } );
-function register_new_mobile_app_user( $request ) {
+function dd_register_new_mobile_app_user( $request ) {
 	
 	
 	
@@ -54,7 +58,7 @@ function register_new_mobile_app_user( $request ) {
 		));
 		
 		/* Creating The User Activation Key */
-		$user_activation_key = get_mobile_app_user_password_reset_key( 
+		$user_activation_key = dd_get_mobile_app_user_password_reset_key( 
 			get_user_by( 'ID' , $user_id ) 
 		);
 		
@@ -79,11 +83,11 @@ function register_new_mobile_app_user( $request ) {
 		
 		/* Emailing the activation URL to the User */
 		$to			= $email;
-		$subject	= WEBSITE_NAME . ' Email Verification';
+		$subject	= DD_WEBSITE_NAME . ' Email Verification';
 		$message	= '
-			Welcome to '. WEBSITE_NAME .', '. WEBSITE_TAGLINE .'!
+			Welcome to '. DD_WEBSITE_NAME .', '. DD_WEBSITE_TAGLINE .'!
 			Please, click on the link below to verify your email and complete the registration process:-
-			' . WEBSITE_SITEURL . '/' . $mobile_app_user_verification_page_slug . '/'
+			' . DD_WEBSITE_SITEURL . '/' . $mobile_app_user_verification_page_slug . '/'
 			. '?username=' 				. $username
 			. '&user_activation_key='	. $user_activation_key
 			;
@@ -133,11 +137,11 @@ add_action( 'rest_api_init', function () {
 		'/login', 
 		array(
 			'methods' => 'POST',
-			'callback' => 'login_mobile_app_user',
+			'callback' => 'dd_login_mobile_app_user',
 		) 
 	);
 } );
-function login_mobile_app_user( $request ) {
+function dd_login_mobile_app_user( $request ) {
 	
 	
 	
@@ -231,11 +235,11 @@ add_action( 'rest_api_init', function () {
 		'/validate', 
 		array(
 			'methods' => 'POST',
-			'callback' => 'validate_mobile_app_user',
+			'callback' => 'dd_validate_mobile_app_user',
 		) 
 	);
 } );
-function validate_mobile_app_user( $request ) {
+function dd_validate_mobile_app_user( $request ) {
 	
 	
 	/************************** TOKEN VERIFICATION **********************************/
@@ -290,11 +294,11 @@ add_action( 'rest_api_init', function () {
 		'/reset_password', 
 		array(
 			'methods' => 'POST',
-			'callback' => 'send_mobile_app_user_password_reset_link',
+			'callback' => 'dd_send_mobile_app_user_password_reset_link',
 		) 
 	);
 } );
-function send_mobile_app_user_password_reset_link( $request ) {
+function dd_send_mobile_app_user_password_reset_link( $request ) {
 	
 	
 	
@@ -316,12 +320,12 @@ function send_mobile_app_user_password_reset_link( $request ) {
 		
 		$response = new stdClass();
 		$response->code		= 'Failure';
-		$response->message	= 'No such account with '. $username_email_type .' "'. $username_email .'" exists in '. WEBSITE_NAME .'. Please, check you '. $username_email_type .' and try again!';
+		$response->message	= 'No such account with '. $username_email_type .' "'. $username_email .'" exists in '. DD_WEBSITE_NAME .'. Please, check you '. $username_email_type .' and try again!';
 		return $response;
 		
 	}
 	
-	$send_password_reset_link = retrieve_password_email( sanitize_text_field( $username_email ) );
+	$send_password_reset_link = dd_retrieve_password_email( sanitize_text_field( $username_email ) );
 	
 	if ( $send_password_reset_link ) {
 		
@@ -352,8 +356,8 @@ function send_mobile_app_user_password_reset_link( $request ) {
 
 
 /* Code To Verify User as soon as the new password is saved (using a hook) */
-add_action( 'password_reset', 'mobile_app_subscriber_verify_on_password_reset', 10, 2 );
-function mobile_app_subscriber_verify_on_password_reset( $user, $new_pass ) {
+add_action( 'password_reset', 'dd_mobile_app_subscriber_verify_on_password_reset', 10, 2 );
+function dd_mobile_app_subscriber_verify_on_password_reset( $user, $new_pass ) {
 	// Do something before password reset.
 	
 	if( 

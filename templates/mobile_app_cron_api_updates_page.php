@@ -4,7 +4,11 @@
 	*/
 
 
-date_default_timezone_set('Asia/Kolkata');
+/* Securing Plugin From Direct Access through the URL Path */
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+
+
 
 
 

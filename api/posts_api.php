@@ -1,6 +1,10 @@
 <?php
 
 
+/* Securing Plugin From Direct Access through the URL Path */
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+
 	
 	
 
@@ -13,11 +17,11 @@ add_action( 'rest_api_init', function () {
 		'/posts', 
 		array(
 			'methods' => 'POST',
-			'callback' => 'retreive_posts_json',
+			'callback' => 'dd_retreive_posts_json',
 		) 
 	);
 } );
-function retreive_posts_json( $request ) {
+function dd_retreive_posts_json( $request ) {
 	
 	
 	
@@ -76,11 +80,11 @@ add_action( 'rest_api_init', function () {
 		'/posts_by_category', 
 		array(
 			'methods' => 'POST',
-			'callback' => 'retreive_posts_by_category_json',
+			'callback' => 'dd_retreive_posts_by_category_json',
 		) 
 	);
 } );
-function retreive_posts_by_category_json( $request ) {
+function dd_retreive_posts_by_category_json( $request ) {
 	
 	
 	
@@ -148,11 +152,11 @@ add_action( 'rest_api_init', function () {
 		'/post', 
 		array(
 			'methods' => 'POST',
-			'callback' => 'retreive_single_post_json',
+			'callback' => 'dd_retreive_single_post_json',
 		) 
 	);
 } );
-function retreive_single_post_json( $request ) {
+function dd_retreive_single_post_json( $request ) {
 	
 	
 	
@@ -228,11 +232,11 @@ add_action( 'rest_api_init', function () {
 		'/comments', 
 		array(
 			'methods' => 'POST',
-			'callback' => 'retreive_comments_json',
+			'callback' => 'dd_retreive_comments_json',
 		) 
 	);
 } );
-function retreive_comments_json( $request ) {
+function dd_retreive_comments_json( $request ) {
 	
 	
 	
@@ -293,11 +297,11 @@ add_action( 'rest_api_init', function () {
 		'/comment_create', 
 		array(
 			'methods' => 'POST',
-			'callback' => 'create_a_comment',
+			'callback' => 'dd_create_a_comment',
 		) 
 	);
 } );
-function create_a_comment( $request ) {
+function dd_create_a_comment( $request ) {
 	
 	
 	/************************** TOKEN VERIFICATION **********************************/

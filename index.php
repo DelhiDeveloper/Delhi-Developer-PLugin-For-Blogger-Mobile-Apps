@@ -41,9 +41,8 @@
 	
 	
 	/* Including Useful Functions */
-	include dirname(__FILE__) . '/useful_functions/retrieve_password_email.php';
-	include dirname(__FILE__) . '/useful_functions/get_mobile_app_user_password_reset_key.php';
-	include dirname(__FILE__) . '/useful_functions/jwt_encode_decode.php';
+	include dirname(__FILE__) . '/useful_functions/dd_retrieve_password_email.php';
+	include dirname(__FILE__) . '/useful_functions/dd_get_mobile_app_user_password_reset_key.php';
 	include dirname(__FILE__) . '/useful_functions/debugging_functions.php';
 	
 	

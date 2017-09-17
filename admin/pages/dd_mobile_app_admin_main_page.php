@@ -1,5 +1,12 @@
 <?php
 
+
+/* Securing Plugin From Direct Access through the URL Path */
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+
+
+
 /* Main Page Function */
 function dd_mobile_app_admin_main_page() {
 
@@ -296,7 +303,7 @@ function dd_mobile_app_admin_main_page() {
 								$mobile_app_cron_api_updates_page = get_post( $dd_mobile_app_important_pages->mobile_app_cron_api_updates_page );
 								$mobile_app_user_verification_page_slug = $mobile_app_cron_api_updates_page->post_name;
 							}
-								echo WEBSITE_SITEURL . '/' . $mobile_app_user_verification_page_slug; 
+								echo DD_WEBSITE_SITEURL . '/' . $mobile_app_user_verification_page_slug; 
 						?>"
 					>
 						Get New Videos
@@ -346,11 +353,11 @@ function dd_mobile_app_admin_main_page() {
 						||	$dd_mobile_app_important_pages->mobile_app_user_verification_page == ''
 					) {
 					?>
-					<a href="<?php echo WEBSITE_SITEURL; ?>/wp-admin/post-new.php?post_type=page" target="_blank">
+					<a href="<?php echo DD_WEBSITE_SITEURL; ?>/wp-admin/post-new.php?post_type=page" target="_blank">
 						Or create a new page for this.
 					</a>
 					(Then
-					<a href="<?php echo WEBSITE_SITEURL . '/wp-admin/admin.php?page=dd_mobile_app_admin_main_page'; ?>">
+					<a href="<?php echo DD_WEBSITE_SITEURL . '/wp-admin/admin.php?page=dd_mobile_app_admin_main_page'; ?>">
 						refresh
 					</a>
 					to select that new page.)
@@ -387,11 +394,11 @@ function dd_mobile_app_admin_main_page() {
 						||	$dd_mobile_app_important_pages->mobile_app_cron_api_updates_page == ''
 					) {
 					?>
-					<a href="<?php echo WEBSITE_SITEURL; ?>/wp-admin/post-new.php?post_type=page" target="_blank">
+					<a href="<?php echo DD_WEBSITE_SITEURL; ?>/wp-admin/post-new.php?post_type=page" target="_blank">
 						Or create a new page for this.
 					</a>
 					(Then
-					<a href="<?php echo WEBSITE_SITEURL . '/wp-admin/admin.php?page=dd_mobile_app_admin_main_page'; ?>">
+					<a href="<?php echo DD_WEBSITE_SITEURL . '/wp-admin/admin.php?page=dd_mobile_app_admin_main_page'; ?>">
 						refresh
 					</a>
 					to select that new page.)

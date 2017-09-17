@@ -5,6 +5,10 @@
 **/
 
 
+/* Securing Plugin From Direct Access through the URL Path */
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+
 
 // Testing User Role
 //print_r( get_user_by( 'login' , 'jasmeet') );exit;
@@ -44,7 +48,7 @@ if(
 		);
 		
 		/* Resetting User Activation Key */
-		$user_activation_key = get_mobile_app_user_password_reset_key( $user );
+		$user_activation_key = dd_get_mobile_app_user_password_reset_key( $user );
 
 	} else {
 		

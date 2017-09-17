@@ -1,11 +1,15 @@
 <?php
 
-/* get_mobile_app_user_password_reset_key() Function */
+
+/* Securing Plugin From Direct Access through the URL Path */
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+/* dd_get_mobile_app_user_password_reset_key() Function */
 
 /* Had to make this custom function because the default get_password_reset_key() is not compatible with Brothersoft Recaptcha Plugin */
 
 	
-function get_mobile_app_user_password_reset_key( $user ) {
+function dd_get_mobile_app_user_password_reset_key( $user ) {
 	
 	global $wpdb;
 	

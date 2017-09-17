@@ -1,8 +1,12 @@
 <?php
 
 
+/* Securing Plugin From Direct Access through the URL Path */
+if ( ! defined( 'ABSPATH' ) ) exit;
 
-function halt() {
+
+
+function dd_halt() {
 	/* Funtion Overloading is being implemented according to the number of arguments */
 	
 	if( func_num_args() == 0 ) {
@@ -31,7 +35,7 @@ function halt() {
 
 
 
-function haltq() {
+function dd_haltq() {
 	global $wpdb;
 	
 	halt(
@@ -44,7 +48,7 @@ function haltq() {
 
 
 
-function haltj( $variable ) {
+function dd_haltj( $variable ) {
 	
 	halt(
 		json_encode( $variable )

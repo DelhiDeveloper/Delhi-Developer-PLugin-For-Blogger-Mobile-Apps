@@ -7,8 +7,8 @@
 
 
 /* Using The Template Created For "mobile_app_user_verification_page" Page */
-add_filter( 'template_include', 'mobile_app_user_verification_page' );
-function mobile_app_user_verification_page( $template ) {
+add_filter( 'template_include', 'dd_mobile_app_user_verification_page' );
+function dd_mobile_app_user_verification_page( $template ) {
 	
 	$file_name = 'mobile_app_user_verification_page.php';
 	
@@ -45,8 +45,8 @@ function mobile_app_user_verification_page( $template ) {
 
 
 /* Using The Template Created For "mobile_app_cron_api_updates_page" Page */
-add_filter( 'template_include', 'mobile_app_cron_api_updates_page' );
-function mobile_app_cron_api_updates_page( $template ) {
+add_filter( 'template_include', 'dd_mobile_app_cron_api_updates_page' );
+function dd_mobile_app_cron_api_updates_page( $template ) {
 	
 	$file_name = 'mobile_app_cron_api_updates_page.php';
 	

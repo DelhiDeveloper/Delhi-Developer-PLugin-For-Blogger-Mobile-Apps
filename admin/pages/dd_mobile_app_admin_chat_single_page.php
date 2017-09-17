@@ -1,6 +1,10 @@
 <?php
 
 
+/* Securing Plugin From Direct Access through the URL Path */
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+
 
 
 /************************************ AJAX REQUESTS RESPONSES *************************************/
@@ -411,7 +415,7 @@ function dd_mobile_app_admin_chat_single_page() {
 		<div class="col-md-12">
 			
 			<a class="btn btn-default"
-				href="<?php echo WEBSITE_SITEURL; ?>/wp-admin/admin.php?page=dd_mobile_app_admin_chats_list_page"
+				href="<?php echo DD_WEBSITE_SITEURL; ?>/wp-admin/admin.php?page=dd_mobile_app_admin_chats_list_page"
 			>
 				<i class="fa fa-arrow-left"></i>
 				Go Back To Chats List
@@ -612,7 +616,7 @@ function dd_mobile_app_admin_chat_single_page() {
 					return str.join("&");
 				},
 				method 	: "POST",
-				url		: '<?php echo WEBSITE_SITEURL; ?>/wp-admin/admin-ajax.php', // ajaxurl,
+				url		: '<?php echo DD_WEBSITE_SITEURL; ?>/wp-admin/admin-ajax.php', // ajaxurl,
 				data	: {
 					'action': 'dd_mobile_app_admin_chat_single',
 					'token': '<?php echo create_user_token( $user ); ?>',
@@ -691,7 +695,7 @@ function dd_mobile_app_admin_chat_single_page() {
 					return str.join("&");
 				},
 				method 	: "POST",
-				url		: '<?php echo WEBSITE_SITEURL; ?>/wp-admin/admin-ajax.php', // ajaxurl,
+				url		: '<?php echo DD_WEBSITE_SITEURL; ?>/wp-admin/admin-ajax.php', // ajaxurl,
 				data	: {
 					'action': 'dd_mobile_app_admin_chat_single_new_messages',
 					'token': '<?php echo create_user_token( $user ); ?>',
@@ -764,7 +768,7 @@ function dd_mobile_app_admin_chat_single_page() {
 					return str.join("&");
 				},
 				method 	: "POST",
-				url		: '<?php echo WEBSITE_SITEURL; ?>/wp-admin/admin-ajax.php', // ajaxurl,
+				url		: '<?php echo DD_WEBSITE_SITEURL; ?>/wp-admin/admin-ajax.php', // ajaxurl,
 				data	: {
 					'action': 'dd_mobile_app_admin_chat_single_create_message',
 					'token': '<?php echo create_user_token( $user ); ?>',
