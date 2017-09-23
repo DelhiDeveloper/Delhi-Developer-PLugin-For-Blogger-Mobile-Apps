@@ -40,7 +40,7 @@ function dd_retreive_author_profile_json( $request ) {
 		$response->code		= 'No Such Author';
 		$response->message	= 'No such author with email address ' . $email . ' exists in our system.';
 		$response->author_profile	= array();
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 	}
 	
 	/* Getting More Details */
@@ -60,7 +60,7 @@ function dd_retreive_author_profile_json( $request ) {
 	$response->code		= 'Author Profile Retreived';
 	$response->message	= 'Author Profile has been retreived.';
 	$response->author_profile	= $author;
-	return $response;
+	return new WP_REST_Response( $response , 200 );
 	
 }
 
@@ -128,7 +128,7 @@ function dd_retreive_authors_json( $request ) {
 	$response->code		= 'Chat Authors Retreived';
 	$response->message	= count($authors_array) . ' authors allowed for chatting have been retreived.';
 	$response->author_list	= $authors_array;
-	return $response;
+	return new WP_REST_Response( $response , 200 );
 	
 }
 
@@ -164,7 +164,7 @@ function dd_retreive_chat_authors_json( $request ) {
 		$response->code			= 'No Authors Set';
 		$response->message		= 'No authors have been selected on the server for chatting!';
 		$response->chat_authors	= array();
-		return $response;		
+		return new WP_REST_Response( $response , 200 );		
 	}
 	
 	$authors = array();
@@ -186,7 +186,7 @@ function dd_retreive_chat_authors_json( $request ) {
 	$response->code		= 'Chat Authors Retreived';
 	$response->message	= count($authors) . ' authors allowed for chatting have been retreived.';
 	$response->chat_authors	= $authors;
-	return $response;
+	return new WP_REST_Response( $response , 200 );
 	
 }
 
@@ -221,7 +221,7 @@ function dd_retreive_messages_json( $request ) {
 		$response = new stdClass();
 		$response->type		= 'Failure';
 		$response->message	= 'Token Not Sent';
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 	}
 	/* Get User From Token */
 	$user = get_user_object_from_token( $token );
@@ -231,7 +231,7 @@ function dd_retreive_messages_json( $request ) {
 		$response = new stdClass();
 		$response->type		= 'Failure';
 		$response->message	= 'Invalid Token';
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 		
 	}
 	/************************** /TOKEN VERIFICATION *********************************/
@@ -294,7 +294,7 @@ function dd_retreive_messages_json( $request ) {
 		$response->code	= 'No Messages';
 		$response->message	= 'No previous messages have been found for chat with this author.';
 		$response->messages	= array();
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 	}
 	
 	
@@ -303,7 +303,7 @@ function dd_retreive_messages_json( $request ) {
 	$response->code	= 'Messages Found';
 	$response->message	= count($messages) . ' have been found of previous messages have been found for chat with this author.';
 	$response->messages	= $messages;
-	return $response;
+	return new WP_REST_Response( $response , 200 );
 	
 	
 	
@@ -340,7 +340,7 @@ function dd_retreive_new_messages_json( $request ) {
 		$response = new stdClass();
 		$response->type		= 'Failure';
 		$response->message	= 'Token Not Sent';
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 	}
 	/* Get User From Token */
 	$user = get_user_object_from_token( $token );
@@ -350,7 +350,7 @@ function dd_retreive_new_messages_json( $request ) {
 		$response = new stdClass();
 		$response->type		= 'Failure';
 		$response->message	= 'Invalid Token';
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 		
 	}
 	/************************** /TOKEN VERIFICATION *********************************/
@@ -405,7 +405,7 @@ function dd_retreive_new_messages_json( $request ) {
 		$response->code	= 'No Messages';
 		$response->message	= 'No previous messages have been found for chat with this author.';
 		$response->messages	= array();
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 	}
 	
 	
@@ -414,7 +414,7 @@ function dd_retreive_new_messages_json( $request ) {
 	$response->code	= 'Messages Found';
 	$response->message	= count($messages) . ' have been found of previous messages have been found for chat with this author.';
 	$response->messages	= $messages;
-	return $response;
+	return new WP_REST_Response( $response , 200 );
 	
 	
 	
@@ -454,7 +454,7 @@ function dd_create_a_message( $request ) {
 		$response = new stdClass();
 		$response->type		= 'Failure';
 		$response->message	= 'Token Not Sent';
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 	}
 	/* Get User From Token */
 	$user = get_user_object_from_token( $token );
@@ -464,7 +464,7 @@ function dd_create_a_message( $request ) {
 		$response = new stdClass();
 		$response->type		= 'Failure';
 		$response->message	= 'Invalid Token';
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 		
 	}
 	/************************** /TOKEN VERIFICATION *********************************/
@@ -486,7 +486,7 @@ function dd_create_a_message( $request ) {
 		$response->code		= 'Author User Not Found';
 		$response->message	= 'No such author user found on the server!';
 		$response->posts	= array();
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 	}
 	
 	
@@ -509,7 +509,7 @@ function dd_create_a_message( $request ) {
 		$response->code		= 'User Is Not Author';
 		$response->message	= 'Message is blocked as it is being sent to a non author user!';
 		$response->posts	= array();
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 	}
 	
 	
@@ -521,7 +521,7 @@ function dd_create_a_message( $request ) {
 		$response->code		= 'Author Not Allowed To Chat';
 		$response->message	= 'This author has not been allowed on the server to chat with mobile app users!';
 		$response->posts	= array();
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 	}
 	
 	
@@ -560,7 +560,7 @@ function dd_create_a_message( $request ) {
 	$response->code			= 'Message Sent';
 	$response->message		= 'Message has been sent to the author "'. $author_user->data->display_name .'".';
 	$response->message_details		= $message;
-	return $response;
+	return new WP_REST_Response( $response , 200 );
 	
 	
 }

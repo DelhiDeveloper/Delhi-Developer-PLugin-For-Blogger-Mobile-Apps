@@ -42,7 +42,7 @@ function dd_retreive_posts_json( $request ) {
 		$response->code		= 'Failure';
 		$response->message	= 'No Posts Could Be Retreived!';
 		$response->posts	= array();
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 	}
 	
 	$posts_array = array();
@@ -65,7 +65,7 @@ function dd_retreive_posts_json( $request ) {
 	$response->code		= 'Success';
 	$response->message	= 'Posts Retreived';
 	$response->posts	= $posts_array;
-	return $response;
+	return new WP_REST_Response( $response , 200 );
 	
 	
 }
@@ -107,7 +107,7 @@ function dd_retreive_posts_by_category_json( $request ) {
 		$response->code		= 'Failure';
 		$response->message	= 'No Posts Could Be Retreived!';
 		$response->posts	= array();
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 	}
 	
 	$posts_array = array();
@@ -130,7 +130,7 @@ function dd_retreive_posts_by_category_json( $request ) {
 	$response->code		= 'Success';
 	$response->message	= 'Posts Retreived';
 	$response->posts	= $posts_array;
-	return $response;
+	return new WP_REST_Response( $response , 200 );
 	
 	
 }
@@ -175,7 +175,7 @@ function dd_retreive_single_post_json( $request ) {
 		$response->code		= 'Failure';
 		$response->message	= 'No such post could be found!';
 		$response->post	= array();
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 	}
 	
 	$posts_object = new stdClass();
@@ -216,7 +216,7 @@ function dd_retreive_single_post_json( $request ) {
 	$response->code		= 'Success';
 	$response->message	= 'Posts Retreived';
 	$response->post	= $posts_object;
-	return $response;
+	return new WP_REST_Response( $response , 200 );
 	
 	
 }
@@ -254,7 +254,7 @@ function dd_retreive_comments_json( $request ) {
 		$response->code		= 'Failure';
 		$response->message	= 'No such post could be found!';
 		$response->post	= array();
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 	}
 	
 	$comments = get_comments(array(
@@ -278,7 +278,7 @@ function dd_retreive_comments_json( $request ) {
 	$response->code		= 'Success';
 	$response->message	= 'Comments Retreived';
 	$response->comments	= $comments_array;
-	return $response;
+	return new WP_REST_Response( $response , 200 );
 	
 	
 }
@@ -311,7 +311,7 @@ function dd_create_a_comment( $request ) {
 		$response = new stdClass();
 		$response->type		= 'Failure';
 		$response->message	= 'Token Not Sent';
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 	}
 	/* Get User From Token */
 	$user = get_user_object_from_token( $token );
@@ -321,7 +321,7 @@ function dd_create_a_comment( $request ) {
 		$response = new stdClass();
 		$response->type		= 'Failure';
 		$response->message	= 'Invalid Token';
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 		
 	}
 	/************************** /TOKEN VERIFICATION *********************************/
@@ -373,7 +373,7 @@ function dd_create_a_comment( $request ) {
 	$response->code		= 'Success';
 	$response->message	= 'Comment created.';
 	$response->comment	= $comment_object;
-	return $response;
+	return new WP_REST_Response( $response , 200 );
 	
 	
 }

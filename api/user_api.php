@@ -32,19 +32,19 @@ function dd_register_new_mobile_app_user( $request ) {
 		$response = new stdClass();
 		$response->type		= 'Failure';
 		$response->message	= 'Must provide username.';
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 	}
 	if( $email == '' || !filter_var($email, FILTER_VALIDATE_EMAIL) ) {
 		$response = new stdClass();
 		$response->type		= 'Failure';
 		$response->message	= 'Must provide a valid email.';
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 	}
 	if( $password == '' ) {
 		$response = new stdClass();
 		$response->type		= 'Failure';
 		$response->message	= 'Must provide a valid password.';
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 	}
 	
 	$user_id = wp_create_user( $username , $password , $email );
@@ -106,7 +106,7 @@ function dd_register_new_mobile_app_user( $request ) {
 		/* Sending Response */
 		//return get_userdata( $user_id );
 		//return check_password_reset_key( $user_activation_key , $username );
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 
 	} else {
 		
@@ -114,7 +114,7 @@ function dd_register_new_mobile_app_user( $request ) {
 		$response->type		= 'Failure';
 		$response->message	= $user_id->get_error_message();
 		
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 		
 	}
 	
@@ -155,14 +155,14 @@ function dd_login_mobile_app_user( $request ) {
 		$response->type		= 'Failure';
 		$response->code		= 'Missing Username/Email';
 		$response->message	= 'Must provide a valid Username/Email.';
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 	}
 	if( $password == '' ) {
 		$response = new stdClass();
 		$response->type		= 'Failure';
 		$response->code		= 'Missing Password';
 		$response->message	= 'Must provide a valid password.';
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 	}
 	
 	/* Authenticate user */
@@ -174,7 +174,7 @@ function dd_login_mobile_app_user( $request ) {
 		$response->type		= 'Failure';
 		$response->code		= 'Wrong Credentials';
 		$response->message	= 'Wrong login credentials. Please try again!';
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 	}
 	
 	
@@ -187,7 +187,7 @@ function dd_login_mobile_app_user( $request ) {
 		$response->type			= 'Failure';
 		$response->code			= 'mobile_app_subscriber_not_verified';
 		$response->message		= "WARNING: User not verified. Please, check your email for a user verification link. If you don't find the email in your inbox, please check your spam folder. You can also reset password by tapping on 'Reset Password' button.";
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 	}
 	
 	
@@ -212,7 +212,7 @@ function dd_login_mobile_app_user( $request ) {
 	$response->message	= 'Login Successful. Token Created.';
 	$response->userdata	= $userdata; // User Specific Details
 	
-	return $response;
+	return new WP_REST_Response( $response , 200 );
 	
 	
 }
@@ -249,7 +249,7 @@ function dd_validate_mobile_app_user( $request ) {
 		$response = new stdClass();
 		$response->type		= 'Failure';
 		$response->message	= 'Token Not Sent';
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 	}
 	/* Get User From Token */
 	$user = get_user_object_from_token( $token );
@@ -259,7 +259,7 @@ function dd_validate_mobile_app_user( $request ) {
 		$response = new stdClass();
 		$response->type		= 'Failure';
 		$response->message	= 'Invalid Token';
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 		
 	}
 	/************************** /TOKEN VERIFICATION *********************************/
@@ -269,7 +269,7 @@ function dd_validate_mobile_app_user( $request ) {
 	$response->type		= 'Success';
 	$response->message	= 'Valid Token. User Information Retreived.';
 	$response->userdata	= $user; // User Specific Details
-	return $response;
+	return new WP_REST_Response( $response , 200 );
 	
 }
 
@@ -321,7 +321,7 @@ function dd_send_mobile_app_user_password_reset_link( $request ) {
 		$response = new stdClass();
 		$response->code		= 'Failure';
 		$response->message	= 'No such account with '. $username_email_type .' "'. $username_email .'" exists in '. DD_WEBSITE_NAME .'. Please, check you '. $username_email_type .' and try again!';
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 		
 	}
 	
@@ -334,7 +334,7 @@ function dd_send_mobile_app_user_password_reset_link( $request ) {
 		$response = new stdClass();
 		$response->code		= 'Success';
 		$response->message	= 'A new password reset link has been sent to your email address "'. $user->user_email .'". Please, check your email visit the link in your email to reset your password.';
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 		
 	} else {
 		
@@ -343,7 +343,7 @@ function dd_send_mobile_app_user_password_reset_link( $request ) {
 		$response = new stdClass();
 		$response->code		= 'Failure';
 		$response->message	= 'A password reset link could not be created to be sent to your email. Please, check you Username/Email and try again!';
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 		
 	}
 	

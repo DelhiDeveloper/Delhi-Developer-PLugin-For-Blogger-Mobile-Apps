@@ -34,7 +34,7 @@ function dd_get_youtube_channel_videos( $request ) {
 		$response->code		= 'Videos Disabled On Server';
 		$response->message	= 'Videos have been disabled for this app on the server!';
 		$response->videos	= $videos;
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 	}
 	
 	$videos = json_decode( get_option( 'dd_mobile_app_youtube_videos' ) );
@@ -46,7 +46,7 @@ function dd_get_youtube_channel_videos( $request ) {
 		$response->code		= 'No Videos Found';
 		$response->message	= 'No videos found On the server!';
 		$response->videos	= $videos;
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 	}
 	
 	/******************************************************************************
@@ -64,7 +64,7 @@ function dd_get_youtube_channel_videos( $request ) {
 	$response->code		= 'Videos Retreived';
 	$response->message	= count($videos) . ' Youtube Videos Retreived!';
 	$response->videos	= $videos;
-	return $response;
+	return new WP_REST_Response( $response , 200 );
 	
 
 	

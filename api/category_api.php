@@ -36,7 +36,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 			$response->code		= 'Success';
 			$response->message	= 'No Top Level Categories Found';
 			$response->top_level_categories	= array();
-			return $response;
+			return new WP_REST_Response( $response , 200 );
 		}
 		
 		$categories_array = array();
@@ -53,7 +53,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		$response->type		= 'Success';
 		$response->message	= 'Categories Retreived';
 		$response->top_level_categories	= $categories_array;
-		return $response;
+		return new WP_REST_Response( $response , 200 );
 		
 		
 	}
