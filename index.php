@@ -30,9 +30,13 @@
 	register_activation_hook( __FILE__, 'dd_mobile_app_create_database_tables' );
 	
 	/* Important includes */
+<<<<<<< HEAD
 	include dirname(__FILE__) . '/includes/shortcodes.php';
 	include dirname(__FILE__) . '/includes/important_hooks.php';
 	include dirname(__FILE__) . '/includes/auto_apply_templates_to_slugs.php';
+=======
+	include dirname(__FILE__) . '/includes/important_hooks.php';
+>>>>>>> origin/master
 	
 	/* Including Request & Response Classes */
 	include dirname(__FILE__) . '/classes/request_functions.php';

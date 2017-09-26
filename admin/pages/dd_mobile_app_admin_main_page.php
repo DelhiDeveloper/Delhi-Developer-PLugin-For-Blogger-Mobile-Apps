@@ -28,11 +28,14 @@ function dd_mobile_app_admin_main_page() {
 				"youtube_channel_id"		=> $_POST['youtube_channel_id']
 			)
 		);
+<<<<<<< HEAD
 		$dd_mobile_app_important_pages = json_encode(
 			array(
 				'dd_youtube_video_player_page'	=>	$_POST['dd_youtube_video_player_page']
 			)
 		);
+=======
+>>>>>>> origin/master
 		$dd_mobile_app_jwt_keys = json_encode(
 			array(
 				'jwt_public_key'	=>	$_POST['jwt_public_key'],
@@ -67,10 +70,6 @@ function dd_mobile_app_admin_main_page() {
 			$dd_mobile_app_youtube_channel_settings
 		);
 		update_option(
-			'dd_mobile_app_important_pages',
-			$dd_mobile_app_important_pages
-		);
-		update_option(
 			'dd_mobile_app_jwt_keys',
 			$dd_mobile_app_jwt_keys
 		);
@@ -86,14 +85,16 @@ function dd_mobile_app_admin_main_page() {
 	
 	//delete_option('dd_mobile_app_chat_authors');
 	//delete_option('dd_mobile_app_youtube_channel_settings');
+<<<<<<< HEAD
 	//delete_option('dd_mobile_app_important_pages');
 	//delete_option('dd_mobile_app_jwt_keys');
+=======
+>>>>>>> origin/master
 	
 	
 	/* Geting Saved Options */
 	$dd_mobile_app_chat_authors				= json_decode( get_option('dd_mobile_app_chat_authors') );
 	$dd_mobile_app_youtube_channel_settings	= json_decode( get_option('dd_mobile_app_youtube_channel_settings') );
-	$dd_mobile_app_important_pages			= json_decode( get_option('dd_mobile_app_important_pages') );
 	$dd_mobile_app_jwt_keys					= json_decode( get_option('dd_mobile_app_jwt_keys') );
 	
 	
@@ -305,6 +306,7 @@ function dd_mobile_app_admin_main_page() {
 			
 			
 			
+<<<<<<< HEAD
 			<div class="col-md-6" style="clear: both;">
 			
 				<h3>Step 3:</h3>
@@ -404,13 +406,15 @@ function dd_mobile_app_admin_main_page() {
 			
 			
 			
+=======
+>>>>>>> origin/master
 			
 			
 			
 			
 			<div class="col-md-6">
 			
-				<h3>Step 4:</h3>
+				<h3>Step 3:</h3>
 				<h4>Create JWT Token Keys:</h4>
 				<p>You are required to create an RS256 public & private keys. These are the keys that will secure your mobile application API's. They will ensure secure communication between the mobile apps and the server.</p>
 				
