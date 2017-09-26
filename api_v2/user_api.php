@@ -12,16 +12,15 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /* Creating a new API End Point : User Registration */
 add_action( 'rest_api_init', function () {
 	register_rest_route( 
-		'delhideveloper/v1', 
+		'delhideveloper/v2', 
 		'/register', 
 		array(
 			'methods' => 'POST',
-			'callback' => 'dd_register_new_mobile_app_user',
-			'permission_callback' => function() { return true; },
+			'callback' => 'dd2_register_new_mobile_app_user',
 		) 
 	);
 } );
-function dd_register_new_mobile_app_user( $request ) {
+function dd2_register_new_mobile_app_user( $request ) {
 	
 	
 	
@@ -65,11 +64,6 @@ function dd_register_new_mobile_app_user( $request ) {
 		$user_activation_key = dd_get_mobile_app_user_password_reset_key( 
 			get_user_by( 'ID' , $user_id ) 
 		);
-		$user_activation_url =		DD_WEBSITE_SITEURL . '/wp-admin/admin-post.php/'
-			. '?action=' 			. 'dd_mobile_app_user_email_verification'
-			. '&username=' 			. $username
-			. '&activation_key='	. $user_activation_key
-		;
 		
 		/* Set User as unverified */
 		update_user_meta( 
@@ -78,13 +72,28 @@ function dd_register_new_mobile_app_user( $request ) {
 			0
 		);
 		
+		/* Getting Mobile User Verification Page Slug */
+		$dd_mobile_app_important_pages = json_decode( get_option( 'dd_mobile_app_important_pages' ) );
+		if( 
+				! $dd_mobile_app_important_pages
+			||	$dd_mobile_app_important_pages->mobile_app_user_verification_page == ''
+		) {
+			$mobile_app_user_verification_page_slug = 'mobile_app_user_verification_page';
+		} else {
+			$mobile_app_user_verification_page = get_post( $dd_mobile_app_important_pages->mobile_app_user_verification_page );
+			$mobile_app_user_verification_page_slug = $mobile_app_user_verification_page->post_name;
+		}
+		
 		/* Emailing the activation URL to the User */
 		$to			= $email;
 		$subject	= DD_WEBSITE_NAME . ' Email Verification';
 		$message	= '
 			Welcome to '. DD_WEBSITE_NAME .', '. DD_WEBSITE_TAGLINE .'!
-			Please, click on the link below to verify your email and complete the registration process:-' . $user_activation_url
-		;
+			Please, click on the link below to verify your email and complete the registration process:-
+			' . DD_WEBSITE_SITEURL . '/' . $mobile_app_user_verification_page_slug . '/'
+			. '?username=' 				. $username
+			. '&user_activation_key='	. $user_activation_key
+			;
 		wp_mail(
 			$to,
 			$subject,
@@ -129,16 +138,15 @@ function dd_register_new_mobile_app_user( $request ) {
 /* Creating a new API End Point : User Login */
 add_action( 'rest_api_init', function () {
 	register_rest_route( 
-		'delhideveloper/v1', 
+		'delhideveloper/v2', 
 		'/login', 
 		array(
 			'methods' => 'POST',
-			'callback' => 'dd_login_mobile_app_user',
-			'permission_callback' => function() { return true; },
+			'callback' => 'dd2_login_mobile_app_user',
 		) 
 	);
 } );
-function dd_login_mobile_app_user( $request ) {
+function dd2_login_mobile_app_user( $request ) {
 	
 	
 	
@@ -227,16 +235,15 @@ function dd_login_mobile_app_user( $request ) {
 /* Creating a new API End Point : User Login */
 add_action( 'rest_api_init', function () {
 	register_rest_route( 
-		'delhideveloper/v1', 
+		'delhideveloper/v2', 
 		'/validate', 
 		array(
 			'methods' => 'POST',
-			'callback' => 'dd_validate_mobile_app_user',
-			'permission_callback' => function() { return true; },
+			'callback' => 'dd2_validate_mobile_app_user',
 		) 
 	);
 } );
-function dd_validate_mobile_app_user( $request ) {
+function dd2_validate_mobile_app_user( $request ) {
 	
 	
 	/************************** TOKEN VERIFICATION **********************************/
@@ -289,16 +296,15 @@ function dd_validate_mobile_app_user( $request ) {
 /* Creating a new API End Point : Password Reset */
 add_action( 'rest_api_init', function () {
 	register_rest_route( 
-		'delhideveloper/v1', 
+		'delhideveloper/v2', 
 		'/reset_password', 
 		array(
 			'methods' => 'POST',
-			'callback' => 'dd_send_mobile_app_user_password_reset_link',
-			'permission_callback' => function() { return true; },
+			'callback' => 'dd2_send_mobile_app_user_password_reset_link',
 		) 
 	);
 } );
-function dd_send_mobile_app_user_password_reset_link( $request ) {
+function dd2_send_mobile_app_user_password_reset_link( $request ) {
 	
 	
 	
@@ -365,10 +371,24 @@ function dd_send_mobile_app_user_password_reset_link( $request ) {
 
 
 
-
-
-
-
+/* Code To Verify User as soon as the new password is saved (using a hook) */
+add_action( 'password_reset', 'dd_mobile_app_subscriber_verify_on_password_reset', 10, 2 );
+function dd2_mobile_app_subscriber_verify_on_password_reset( $user, $new_pass ) {
+	// Do something before password reset.
+	
+	if( 
+			in_array( 'mobile_app_subscriber', (array) $user->roles ) 
+		&&	get_user_meta( $user->ID , 'mobile_app_subscriber_verified' )[0] == 0
+	) {
+		// Set "mobile_app_user_verified" to true if already false
+		update_user_meta( 
+			$user->ID, 
+			'mobile_app_subscriber_verified', 
+			1, // New value
+			0 // Old value : to be checked before update
+		);
+	}
+}
 
 
 

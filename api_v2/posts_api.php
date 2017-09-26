@@ -13,16 +13,15 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /* Creating a new API End Point : User Registration */
 add_action( 'rest_api_init', function () {
 	register_rest_route( 
-		'delhideveloper/v1', 
+		'delhideveloper/v2', 
 		'/posts', 
 		array(
-			'methods' => 'POST',
-			'callback' => 'dd_retreive_posts_json',
-			'permission_callback' => function() { return true; },
+			'methods' => 'GET',
+			'callback' => 'dd2_retreive_posts_json',
 		) 
 	);
 } );
-function dd_retreive_posts_json( $request ) {
+function dd2_retreive_posts_json( $request ) {
 	
 	
 	$posts_per_page = 10;
@@ -71,7 +70,6 @@ function dd_retreive_posts_json( $request ) {
 	$response = new stdClass();
 	$response->type		= 'Success';
 	$response->code		= 'Posts Retreived';
-	$response->code		= 'Success'; // Because the app v1 works like this (it reads code instead of type)
 	$response->message	= 'Posts have been retreived.';
 	$response->posts	= $posts_array;
 	return new WP_REST_Response( $response , 200 );
@@ -85,16 +83,15 @@ function dd_retreive_posts_json( $request ) {
 /* Creating a new API End Point : User Registration */
 add_action( 'rest_api_init', function () {
 	register_rest_route( 
-		'delhideveloper/v1', 
+		'delhideveloper/v2', 
 		'/posts_by_category', 
 		array(
-			'methods' => 'POST',
-			'callback' => 'dd_retreive_posts_by_category_json',
-			'permission_callback' => function() { return true; },
+			'methods' => 'GET',
+			'callback' => 'dd2_retreive_posts_by_category_json',
 		) 
 	);
 } );
-function dd_retreive_posts_by_category_json( $request ) {
+function dd2_retreive_posts_by_category_json( $request ) {
 	
 	
 	
@@ -163,7 +160,6 @@ function dd_retreive_posts_by_category_json( $request ) {
 	$response = new stdClass();
 	$response->type		= 'Success';
 	$response->code		= 'Posts Retreived';
-	$response->code		= 'Success';
 	$response->message	= 'Posts have been retreived!';
 	$response->posts	= $posts_array;
 	return new WP_REST_Response( $response , 200 );
@@ -184,16 +180,15 @@ function dd_retreive_posts_by_category_json( $request ) {
 /* Creating a new API End Point : User Registration */
 add_action( 'rest_api_init', function () {
 	register_rest_route( 
-		'delhideveloper/v1', 
+		'delhideveloper/v2', 
 		'/post', 
 		array(
-			'methods' => 'POST',
-			'callback' => 'dd_retreive_single_post_json',
-			'permission_callback' => function() { return true; },
+			'methods' => 'GET',
+			'callback' => 'dd2_retreive_single_post_json',
 		) 
 	);
 } );
-function dd_retreive_single_post_json( $request ) {
+function dd2_retreive_single_post_json( $request ) {
 	
 	
 	
@@ -267,7 +262,6 @@ function dd_retreive_single_post_json( $request ) {
 	$response = new stdClass();
 	$response->type		= 'Success';
 	$response->code		= 'Post Retreived';
-	$response->code		= 'Success';
 	$response->message	= 'Post has been retreived!';
 	$response->post	= $posts_object;
 	return new WP_REST_Response( $response , 200 );
@@ -282,16 +276,15 @@ function dd_retreive_single_post_json( $request ) {
 /* Creating a new API End Point : User Registration */
 add_action( 'rest_api_init', function () {
 	register_rest_route( 
-		'delhideveloper/v1', 
+		'delhideveloper/v2', 
 		'/comments', 
 		array(
-			'methods' => 'POST',
-			'callback' => 'dd_retreive_comments_json',
-			'permission_callback' => function() { return true; },
+			'methods' => 'GET',
+			'callback' => 'dd2_retreive_comments_json',
 		) 
 	);
 } );
-function dd_retreive_comments_json( $request ) {
+function dd2_retreive_comments_json( $request ) {
 	
 	
 	
@@ -347,7 +340,6 @@ function dd_retreive_comments_json( $request ) {
 	$response = new stdClass();
 	$response->type		= 'Success';
 	$response->code		= 'Comments Retreived';
-	$response->code		= 'Success';
 	$response->message	= 'Comments have been retreived!';
 	$response->comments	= $comments_array;
 	return new WP_REST_Response( $response , 200 );
@@ -365,40 +357,16 @@ function dd_retreive_comments_json( $request ) {
 /* Creating a new API End Point : User Registration */
 add_action( 'rest_api_init', function () {
 	register_rest_route( 
-		'delhideveloper/v1', 
+		'delhideveloper/v2', 
 		'/comment_create', 
 		array(
 			'methods' => 'POST',
-			'callback' => 'dd_create_a_comment',
+			'callback' => 'dd2_create_a_comment',
 			'permission_callback' => function() { return true; },
 		) 
 	);
 } );
-function dd_create_a_comment( $request ) {
-	
-	
-	/************************** TOKEN VERIFICATION **********************************/
-	/* Check if token exists */
-	$token	= $request->get_param("token");
-	if( is_null( $token ) ) {
-		$response = new stdClass();
-		$response->type		= 'Failure';
-		$response->code	= 'Token Not Sent';
-		$response->message	= 'Token has not been sent with the message.';
-		return new WP_REST_Response( $response , 200 );
-	}
-	/* Get User From Token */
-	$user = get_user_object_from_token( $token );
-	/* If Token Not Valid */
-	if( !$user ) {
-		
-		$response = new stdClass();
-		$response->type		= 'Failure';
-		$response->code	= 'Invalid Token';
-		$response->message	= 'Token is not valid. Please, login to get a new token.';
-		return new WP_REST_Response( $response , 200 );
-	}
-	/************************** /TOKEN VERIFICATION *********************************/
+function dd2_create_a_comment( $request ) {
 	
 	
 	$posts_per_page = 10;
@@ -462,7 +430,6 @@ function dd_create_a_comment( $request ) {
 	$response = new stdClass();
 	$response->type		= 'Success';
 	$response->code		= 'Comment Created';
-	$response->code		= 'Success';
 	$response->message	= 'Comment has been created!';
 	$response->comment	= $comment_object;
 	return new WP_REST_Response( $response , 200 );

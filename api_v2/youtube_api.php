@@ -13,17 +13,17 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /* Creating a new API End Point : User Registration */
 add_action( 'rest_api_init', function () {
 	register_rest_route( 
-		'delhideveloper/v1', 
+		'delhideveloper/v2', 
 		'/videos', 
 		array(
 			array(
-				'methods'=>'POST',
-				'callback' => 'dd_get_youtube_channel_videos',
+				'methods'=>'GET',
+				'callback' => 'dd2_get_youtube_channel_videos',
 			)
 		) 
 	);
 } );
-function dd_get_youtube_channel_videos( $request ) {
+function dd2_get_youtube_channel_videos( $request ) {
 	
 	$dd_mobile_app_youtube_channel_settings = json_decode(get_option('dd_mobile_app_youtube_channel_settings'));
 	
@@ -71,12 +71,6 @@ function dd_get_youtube_channel_videos( $request ) {
 
 	
 }
-
-
-
-
-
-
 
 
 

@@ -18,16 +18,15 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /* Creating a new API End Point : Get All Messages */
 add_action( 'rest_api_init', function () {
 	register_rest_route( 
-		'delhideveloper/v1', 
+		'delhideveloper/v2', 
 		'/author_profile', 
 		array(
-			'methods' => 'POST',
-			'callback' => 'dd_retreive_author_profile_json',
-			'permission_callback' => function() { return true; },
+			'methods' => 'GET',
+			'callback' => 'dd2_retreive_author_profile_json',
 		) 
 	);
 } );
-function dd_retreive_author_profile_json( $request ) {
+function dd2_retreive_author_profile_json( $request ) {
 	
 	/* Getting Parameters */
 	$email	= $request->get_param("email");
@@ -80,19 +79,18 @@ function dd_retreive_author_profile_json( $request ) {
 
 
 
-/* Creating a new API End Point : Get All Messages */
+/* Creating a new API End Point : Get All Authors */
 add_action( 'rest_api_init', function () {
 	register_rest_route( 
-		'delhideveloper/v1', 
+		'delhideveloper/v2', 
 		'/author_list', 
 		array(
-			'methods' => 'POST',
-			'callback' => 'dd_retreive_authors_json',
-			'permission_callback' => function() { return true; },
+			'methods' => 'GET',
+			'callback' => 'dd2_retreive_authors_json',
 		) 
 	);
 } );
-function dd_retreive_authors_json( $request ) {
+function dd2_retreive_authors_json( $request ) {
 	
 	$dd_mobile_app_chat_authors = json_decode( get_option('dd_mobile_app_chat_authors') );
 	
@@ -151,19 +149,18 @@ function dd_retreive_authors_json( $request ) {
 
 
 
-/* Creating a new API End Point : Get All Messages */
+/* Creating a new API End Point : Get Only Authors That Are Allowed Chatting */
 add_action( 'rest_api_init', function () {
 	register_rest_route( 
-		'delhideveloper/v1', 
+		'delhideveloper/v2', 
 		'/chat_authors', 
 		array(
-			'methods' => 'POST',
-			'callback' => 'dd_retreive_chat_authors_json',
-			'permission_callback' => function() { return true; },
+			'methods' => 'GET',
+			'callback' => 'dd2_retreive_chat_authors_json',
 		) 
 	);
 } );
-function dd_retreive_chat_authors_json( $request ) {
+function dd2_retreive_chat_authors_json( $request ) {
 	
 	$dd_mobile_app_chat_authors = json_decode( get_option('dd_mobile_app_chat_authors') );
 	
@@ -214,16 +211,15 @@ function dd_retreive_chat_authors_json( $request ) {
 /* Creating a new API End Point : Create Message */
 add_action( 'rest_api_init', function () {
 	register_rest_route( 
-		'delhideveloper/v1', 
+		'delhideveloper/v2', 
 		'/messages', 
 		array(
-			'methods' => 'POST',
-			'callback' => 'dd_retreive_messages_json',
-			'permission_callback' => function() { return true; },
+			'methods' => 'GET',
+			'callback' => 'dd2_retreive_messages_json',
 		) 
 	);
 } );
-function dd_retreive_messages_json( $request ) {
+function dd2_retreive_messages_json( $request ) {
 	
 	global $wpdb;
 	
@@ -349,16 +345,15 @@ function dd_retreive_messages_json( $request ) {
 /* Creating a new API End Point : Create Message */
 add_action( 'rest_api_init', function () {
 	register_rest_route( 
-		'delhideveloper/v1', 
+		'delhideveloper/v2', 
 		'/new_messages', 
 		array(
-			'methods' => 'POST',
-			'callback' => 'dd_retreive_new_messages_json',
-			'permission_callback' => function() { return true; },
+			'methods' => 'GET',
+			'callback' => 'dd2_retreive_new_messages_json',
 		) 
 	);
 } );
-function dd_retreive_new_messages_json( $request ) {
+function dd2_retreive_new_messages_json( $request ) {
 	
 	global $wpdb;
 	
@@ -482,16 +477,16 @@ function dd_retreive_new_messages_json( $request ) {
 /* Creating a new API End Point : Get All Messages */
 add_action( 'rest_api_init', function () {
 	register_rest_route( 
-		'delhideveloper/v1', 
+		'delhideveloper/v2', 
 		'/message_create', 
 		array(
 			'methods' => 'POST',
-			'callback' => 'dd_create_a_message',
+			'callback' => 'dd2_create_a_message',
 			'permission_callback' => function() { return true; },
 		) 
 	);
 } );
-function dd_create_a_message( $request ) {
+function dd2_create_a_message( $request ) {
 	
 	global $wpdb;
 	

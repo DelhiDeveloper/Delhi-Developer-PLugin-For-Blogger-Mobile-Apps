@@ -6,30 +6,37 @@
 
 
 
-/* Using The Template Created For "mobile_app_user_verification_page" Page */
-add_filter( 'template_include', 'dd_mobile_app_user_verification_page' );
-function dd_mobile_app_user_verification_page( $template ) {
+// Using The Template Created For "mobile_app_user_verification_page" Page
+add_filter( 'template_include', 'dd_apply_template_youtube_video_player_page' );
+function dd_apply_template_youtube_video_player_page( $template ) {
 	
-	$file_name = 'mobile_app_user_verification_page.php';
-	
-	/* Getting Mobile User Verification Page Slug */
+	// Getting Mobile User Verification Page Slug
 	$dd_mobile_app_important_pages = json_decode( get_option( 'dd_mobile_app_important_pages' ) );
 	if( 
 			! $dd_mobile_app_important_pages
-		||	$dd_mobile_app_important_pages->mobile_app_user_verification_page == ''
+		||	$dd_mobile_app_important_pages->dd_youtube_video_player_page == ''
 	) {
-		$mobile_app_user_verification_page_slug = 'mobile_app_user_verification_page';
+		// If no page has been assigned to the template
+		$mobile_app_user_verification_page_slug = 'dd_youtube_video_player_page';
 	} else {
-		$mobile_app_user_verification_page = get_post( $dd_mobile_app_important_pages->mobile_app_user_verification_page );
-		$mobile_app_user_verification_page_slug = $mobile_app_user_verification_page->post_name;
+		// If a page has been assigned to the template in plugin settings
+		$dd_youtube_video_player_page = get_post( $dd_mobile_app_important_pages->dd_youtube_video_player_page );
+		$dd_youtube_video_player_page_slug = $dd_youtube_video_player_page->post_name;
 	}
 	
-	if ( is_page( $mobile_app_user_verification_page_slug ) ) {
+	// Initializing template name and path
+	$file_name	= 'dd_youtube_video_player_page.php';
+	$file_url	= dirname( __FILE__ ) . '/../templates/' . $file_name;
+	
+	// If current page request is for the template's page's slug
+	if ( is_page( $dd_youtube_video_player_page_slug ) ) {
+		// Look for the template in the theme folder
 		if ( locate_template( $file_name ) ) {
+			// Use theme's version of the template
 			$template = locate_template( $file_name );
 		} else {
 			// Template not found in theme's folder, use plugin's template as a fallback
-			$template = dirname( __FILE__ ) . '/../templates/' . $file_name;
+			$template = $file_url;
 		}
 	}
 	
@@ -39,41 +46,6 @@ function dd_mobile_app_user_verification_page( $template ) {
 
 
 
-
-
-
-
-
-/* Using The Template Created For "mobile_app_cron_api_updates_page" Page */
-add_filter( 'template_include', 'dd_mobile_app_cron_api_updates_page' );
-function dd_mobile_app_cron_api_updates_page( $template ) {
-	
-	$file_name = 'mobile_app_cron_api_updates_page.php';
-	
-	/* Getting Mobile User Verification Page Slug */
-	$dd_mobile_app_important_pages = json_decode( get_option( 'dd_mobile_app_important_pages' ) );
-	if( 
-			! $dd_mobile_app_important_pages
-		||	$dd_mobile_app_important_pages->mobile_app_cron_api_updates_page == ''
-	) {
-		$mobile_app_user_verification_page_slug = 'mobile_app_cron_api_updates_page';
-	} else {
-		$mobile_app_cron_api_updates_page = get_post( $dd_mobile_app_important_pages->mobile_app_cron_api_updates_page );
-		$mobile_app_user_verification_page_slug = $mobile_app_cron_api_updates_page->post_name;
-	}
-	
-	if ( is_page( $mobile_app_user_verification_page_slug ) ) {
-		if ( locate_template( $file_name ) ) {
-			$template = locate_template( $file_name );
-		} else {
-			// Template not found in theme's folder, use plugin's template as a fallback
-			$template = dirname( __FILE__ ) . '/../templates/' . $file_name;
-		}
-	}
-	
-	return $template;
-	
-}
 
 
 

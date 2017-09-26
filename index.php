@@ -30,6 +30,8 @@
 	register_activation_hook( __FILE__, 'dd_mobile_app_create_database_tables' );
 	
 	/* Important includes */
+	include dirname(__FILE__) . '/includes/shortcodes.php';
+	include dirname(__FILE__) . '/includes/important_hooks.php';
 	include dirname(__FILE__) . '/includes/auto_apply_templates_to_slugs.php';
 	
 	/* Including Request & Response Classes */
@@ -46,11 +48,14 @@
 	include dirname(__FILE__) . '/useful_functions/debugging_functions.php';
 	
 	
+	/*******************************
+		Commenting this for now solved a major issue of 503 errors returned by the api
+	****************************************/
 	/* Setting The Header if the request is for REST API */
 	// Found this better way here:-
 	// https://joshpress.net/access-control-headers-for-the-wordpress-rest-api/
+	
 	add_action( 'rest_api_init', function() {
-		
 		remove_filter( 'rest_pre_serve_request', 'rest_send_cors_headers' );
 		add_filter( 'rest_pre_serve_request', function( $value ) {
 			header( 'Access-Control-Allow-Origin: *' );
@@ -61,6 +66,8 @@
 			return $value;			
 		});
 	}, 15 );
+	/**/
+	
 	
 	
 	
@@ -69,14 +76,26 @@
 	
 	
 	
-    /* Custom API Includes */
-	include dirname(__FILE__) . '/api/user_api.php';
-	include dirname(__FILE__) . '/api/posts_api.php';
-	include dirname(__FILE__) . '/api/category_api.php';
+    /* Custom API V1 Includes */
 	include dirname(__FILE__) . '/api/youtube_api.php';
+	include dirname(__FILE__) . '/api/posts_api.php';
+	include dirname(__FILE__) . '/api/user_api.php';
 	include dirname(__FILE__) . '/api/messages_api.php';
-    
+	include dirname(__FILE__) . '/api/category_api.php';
+	include dirname(__FILE__) . '/api/content_api.php';
+	/**/
 	
+	
+	
+    /* Custom API V2 Includes */
+	include dirname(__FILE__) . '/api_v2/dd_v2_check_mobile_app_user_token.php';
+	include dirname(__FILE__) . '/api_v2/user_api.php';
+	include dirname(__FILE__) . '/api_v2/posts_api.php'; //
+	include dirname(__FILE__) . '/api_v2/messages_api.php'; //
+	include dirname(__FILE__) . '/api_v2/youtube_api.php';
+	include dirname(__FILE__) . '/api_v2/category_api.php';
+	include dirname(__FILE__) . '/api_v2/content_api.php';
+    /**/
 	
 	
 	

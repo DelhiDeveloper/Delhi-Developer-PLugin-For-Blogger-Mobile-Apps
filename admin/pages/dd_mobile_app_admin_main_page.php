@@ -30,8 +30,7 @@ function dd_mobile_app_admin_main_page() {
 		);
 		$dd_mobile_app_important_pages = json_encode(
 			array(
-				'mobile_app_user_verification_page'	=>	$_POST['mobile_app_user_verification_page'],
-				'mobile_app_cron_api_updates_page'	=>	$_POST['mobile_app_cron_api_updates_page']
+				'dd_youtube_video_player_page'	=>	$_POST['dd_youtube_video_player_page']
 			)
 		);
 		$dd_mobile_app_jwt_keys = json_encode(
@@ -88,6 +87,7 @@ function dd_mobile_app_admin_main_page() {
 	//delete_option('dd_mobile_app_chat_authors');
 	//delete_option('dd_mobile_app_youtube_channel_settings');
 	//delete_option('dd_mobile_app_important_pages');
+	//delete_option('dd_mobile_app_jwt_keys');
 	
 	
 	/* Geting Saved Options */
@@ -291,20 +291,7 @@ function dd_mobile_app_admin_main_page() {
 					<a 
 						class="btn btn-primary" 
 						target="_blank"
-						href="<?php 	
-							/* Getting Mobile User Verification Page Slug */
-							$dd_mobile_app_important_pages = json_decode( get_option( 'dd_mobile_app_important_pages' ) );
-							if( 
-									! $dd_mobile_app_important_pages
-								||	$dd_mobile_app_important_pages->mobile_app_cron_api_updates_page == ''
-							) {
-								$mobile_app_user_verification_page_slug = 'mobile_app_cron_api_updates_page';
-							} else {
-								$mobile_app_cron_api_updates_page = get_post( $dd_mobile_app_important_pages->mobile_app_cron_api_updates_page );
-								$mobile_app_user_verification_page_slug = $mobile_app_cron_api_updates_page->post_name;
-							}
-								echo DD_WEBSITE_SITEURL . '/' . $mobile_app_user_verification_page_slug; 
-						?>"
+						href="https://mylittlemuffin.com/wp-admin/admin-post.php/?action=dd_youtube_videos_list_update"
 					>
 						Get New Videos
 					</a>
@@ -326,19 +313,19 @@ function dd_mobile_app_admin_main_page() {
 				
 				<div class="form-group">
 					
-					<label>1. Mobile App User Verification Page</label>
-					<p>When a new user registers on the mobile app. They are sent a verification link on their email. This verification link will be the url of the selected page.</p>
+					<label>1. Videos Page</label>
+					<p>This page will show your youtube videos in form of a youtube like video player.</p>
 					
 					<select 
 						class="form-control input-sm" 
-						id="mobile_app_user_verification_page" 
-						name="mobile_app_user_verification_page" 
+						id="dd_youtube_video_player_page" 
+						name="dd_youtube_video_player_page" 
 					>
 						<option value="">-- Select a Page --</option>
 						<?php foreach( $pages as $page ) { ?>
 						<option 
 							value="<?php echo $page->ID; ?>"
-							<?php if( $dd_mobile_app_important_pages->mobile_app_user_verification_page == $page->ID ) { ?>
+							<?php if( $dd_mobile_app_important_pages->dd_youtube_video_player_page == $page->ID ) { ?>
 								selected="selected"
 							<?php } ?>
 						>
@@ -350,7 +337,7 @@ function dd_mobile_app_admin_main_page() {
 					<?php					
 					if( 
 							! $dd_mobile_app_important_pages
-						||	$dd_mobile_app_important_pages->mobile_app_user_verification_page == ''
+						||	$dd_mobile_app_important_pages->dd_youtube_video_player_page == ''
 					) {
 					?>
 					<a href="<?php echo DD_WEBSITE_SITEURL; ?>/wp-admin/post-new.php?post_type=page" target="_blank">
@@ -365,6 +352,7 @@ function dd_mobile_app_admin_main_page() {
 					
 				</div>
 				
+				<?php /*
 				<div class="form-group">
 					
 					<label>2. Cron Page for Updates From API's</label>
@@ -404,6 +392,9 @@ function dd_mobile_app_admin_main_page() {
 					to select that new page.)
 					<?php } ?>
 				</div>
+				*/ ?>
+				
+				
 				
 			</div>
 			
