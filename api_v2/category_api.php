@@ -13,21 +13,22 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /* Creating a new API End Point : User Registration */
 add_action( 'rest_api_init', function () {
 	register_rest_route( 
-		'delhideveloper/v1', 
+		'delhideveloper/v2', 
 		'/top_level_categories', 
 		array(
 			array(
-				'methods'=>'POST',
-				'callback' => 'dd_retreive_top_level_categories_json',
+				'methods'=>'GET',
+				'callback' => 'dd2_retreive_top_level_categories_json',
 			)
 		) 
 	);
 } );
-function dd_retreive_top_level_categories_json( $request ) {
+function dd2_retreive_top_level_categories_json( $request ) {
 	
 	$categories = get_terms( 
 		'category',
 		array(
+			'orderby' => 'name',
 			'parent' => 0
 		)
 	);
@@ -60,7 +61,6 @@ function dd_retreive_top_level_categories_json( $request ) {
 	
 	
 }
-
 
 
 

@@ -28,12 +28,6 @@ function dd_mobile_app_admin_main_page() {
 				"youtube_channel_id"		=> $_POST['youtube_channel_id']
 			)
 		);
-		$dd_mobile_app_important_pages = json_encode(
-			array(
-				'mobile_app_user_verification_page'	=>	$_POST['mobile_app_user_verification_page'],
-				'mobile_app_cron_api_updates_page'	=>	$_POST['mobile_app_cron_api_updates_page']
-			)
-		);
 		$dd_mobile_app_jwt_keys = json_encode(
 			array(
 				'jwt_public_key'	=>	$_POST['jwt_public_key'],
@@ -68,10 +62,6 @@ function dd_mobile_app_admin_main_page() {
 			$dd_mobile_app_youtube_channel_settings
 		);
 		update_option(
-			'dd_mobile_app_important_pages',
-			$dd_mobile_app_important_pages
-		);
-		update_option(
 			'dd_mobile_app_jwt_keys',
 			$dd_mobile_app_jwt_keys
 		);
@@ -87,13 +77,11 @@ function dd_mobile_app_admin_main_page() {
 	
 	//delete_option('dd_mobile_app_chat_authors');
 	//delete_option('dd_mobile_app_youtube_channel_settings');
-	//delete_option('dd_mobile_app_important_pages');
 	
 	
 	/* Geting Saved Options */
 	$dd_mobile_app_chat_authors				= json_decode( get_option('dd_mobile_app_chat_authors') );
 	$dd_mobile_app_youtube_channel_settings	= json_decode( get_option('dd_mobile_app_youtube_channel_settings') );
-	$dd_mobile_app_important_pages			= json_decode( get_option('dd_mobile_app_important_pages') );
 	$dd_mobile_app_jwt_keys					= json_decode( get_option('dd_mobile_app_jwt_keys') );
 	
 	
@@ -291,118 +279,10 @@ function dd_mobile_app_admin_main_page() {
 					<a 
 						class="btn btn-primary" 
 						target="_blank"
-						href="<?php 	
-							/* Getting Mobile User Verification Page Slug */
-							$dd_mobile_app_important_pages = json_decode( get_option( 'dd_mobile_app_important_pages' ) );
-							if( 
-									! $dd_mobile_app_important_pages
-								||	$dd_mobile_app_important_pages->mobile_app_cron_api_updates_page == ''
-							) {
-								$mobile_app_user_verification_page_slug = 'mobile_app_cron_api_updates_page';
-							} else {
-								$mobile_app_cron_api_updates_page = get_post( $dd_mobile_app_important_pages->mobile_app_cron_api_updates_page );
-								$mobile_app_user_verification_page_slug = $mobile_app_cron_api_updates_page->post_name;
-							}
-								echo DD_WEBSITE_SITEURL . '/' . $mobile_app_user_verification_page_slug; 
-						?>"
+						href="https://mylittlemuffin.com/wp-admin/admin-post.php/?action=dd_youtube_videos_list_update"
 					>
 						Get New Videos
 					</a>
-				</div>
-				
-			</div>
-			
-			
-			
-			
-			
-			
-			
-			<div class="col-md-6" style="clear: both;">
-			
-				<h3>Step 3:</h3>
-				<h4>Create Important Pages Required For The Mobile App:</h4>
-				<p>You are required to create some pages for mobile app to work properly. Please create the belowmentioned pages and delect them from the dropdown.</p>
-				
-				<div class="form-group">
-					
-					<label>1. Mobile App User Verification Page</label>
-					<p>When a new user registers on the mobile app. They are sent a verification link on their email. This verification link will be the url of the selected page.</p>
-					
-					<select 
-						class="form-control input-sm" 
-						id="mobile_app_user_verification_page" 
-						name="mobile_app_user_verification_page" 
-					>
-						<option value="">-- Select a Page --</option>
-						<?php foreach( $pages as $page ) { ?>
-						<option 
-							value="<?php echo $page->ID; ?>"
-							<?php if( $dd_mobile_app_important_pages->mobile_app_user_verification_page == $page->ID ) { ?>
-								selected="selected"
-							<?php } ?>
-						>
-							<?php echo $page->post_title; ?>
-						</option>
-						<?php } ?>
-					</select>
-					
-					<?php					
-					if( 
-							! $dd_mobile_app_important_pages
-						||	$dd_mobile_app_important_pages->mobile_app_user_verification_page == ''
-					) {
-					?>
-					<a href="<?php echo DD_WEBSITE_SITEURL; ?>/wp-admin/post-new.php?post_type=page" target="_blank">
-						Or create a new page for this.
-					</a>
-					(Then
-					<a href="<?php echo DD_WEBSITE_SITEURL . '/wp-admin/admin.php?page=dd_mobile_app_admin_main_page'; ?>">
-						refresh
-					</a>
-					to select that new page.)
-					<?php } ?>
-					
-				</div>
-				
-				<div class="form-group">
-					
-					<label>2. Cron Page for Updates From API's</label>
-					<p>This page is required to create a CRON Job for getting the updates from API's like Youtube Videos list for a channel. You will be required to create a cron job for this page to get updates of youtube channel regularly.</p>
-					
-					<select 
-						class="form-control input-sm" 
-						id="mobile_app_cron_api_updates_page" 
-						name="mobile_app_cron_api_updates_page" 
-					>
-						<option value="">-- Select a Page --</option>
-						<?php foreach( $pages as $page ) { ?>
-						<option 
-							value="<?php echo $page->ID; ?>"
-							<?php if( $dd_mobile_app_important_pages->mobile_app_cron_api_updates_page == $page->ID ) { ?>
-								selected="selected"
-							<?php } ?>
-						>
-							<?php echo $page->post_title; ?>
-						</option>
-						<?php } ?>
-					</select>
-					
-					<?php					
-					if( 
-							! $dd_mobile_app_important_pages
-						||	$dd_mobile_app_important_pages->mobile_app_cron_api_updates_page == ''
-					) {
-					?>
-					<a href="<?php echo DD_WEBSITE_SITEURL; ?>/wp-admin/post-new.php?post_type=page" target="_blank">
-						Or create a new page for this.
-					</a>
-					(Then
-					<a href="<?php echo DD_WEBSITE_SITEURL . '/wp-admin/admin.php?page=dd_mobile_app_admin_main_page'; ?>">
-						refresh
-					</a>
-					to select that new page.)
-					<?php } ?>
 				</div>
 				
 			</div>
@@ -419,7 +299,7 @@ function dd_mobile_app_admin_main_page() {
 			
 			<div class="col-md-6">
 			
-				<h3>Step 4:</h3>
+				<h3>Step 3:</h3>
 				<h4>Create JWT Token Keys:</h4>
 				<p>You are required to create an RS256 public & private keys. These are the keys that will secure your mobile application API's. They will ensure secure communication between the mobile apps and the server.</p>
 				
