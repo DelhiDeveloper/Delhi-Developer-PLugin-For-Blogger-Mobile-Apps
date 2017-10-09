@@ -33,6 +33,7 @@
 	include dirname(__FILE__) . '/includes/shortcodes.php';
 	include dirname(__FILE__) . '/includes/important_hooks.php';
 	include dirname(__FILE__) . '/includes/auto_apply_templates_to_slugs.php';
+	include dirname(__FILE__) . '/includes/important_hooks.php';
 	
 	/* Including Request & Response Classes */
 	include dirname(__FILE__) . '/classes/request_functions.php';

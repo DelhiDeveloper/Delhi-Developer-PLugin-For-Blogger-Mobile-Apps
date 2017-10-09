@@ -82,8 +82,11 @@ function dd_mobile_app_admin_main_page() {
 	
 	//delete_option('dd_mobile_app_chat_authors');
 	//delete_option('dd_mobile_app_youtube_channel_settings');
+<<<<<<< HEAD
 	//delete_option('dd_mobile_app_important_pages');
 	//delete_option('dd_mobile_app_jwt_keys');
+=======
+>>>>>>> origin/master
 	
 	
 	/* Geting Saved Options */
@@ -300,6 +303,7 @@ function dd_mobile_app_admin_main_page() {
 			
 			
 			
+<<<<<<< HEAD
 			<div class="col-md-6" style="clear: both;">
 			
 				<h3>Step 3:</h3>
@@ -399,6 +403,8 @@ function dd_mobile_app_admin_main_page() {
 			
 			
 			
+=======
+>>>>>>> origin/master
 			
 			
 			
